@@ -1,0 +1,39 @@
+server:
+  port: 8763
+  address: 0.0.0.0
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: c-game
+  datasource:
+    url: jdbc:mysql://49.234.78.68:3306/game?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: ${DATASOURCE_USERNAME:root}
+    password: ${DATASOURCE_PASSWORD:#DSS3356dss}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      validation-timeout: 3000
+      connection-test-query: select 1 from dual
+      connection-init-sql: set names utf8mb4
+      connection-timeout: 60000
+      login-timeout: 5
+      max-lifetime: 60000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
+
+#mybatis:
+#  unders
+#  configuration:
+mybatis:
+  configuration:
+    auto-mapping-behavior:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath*:mapper/*Mapper.xml

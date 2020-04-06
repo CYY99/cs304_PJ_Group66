@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.eurekaconsumer.dao.GameDao">
+
+	<select id="selectMembershipAll" resultType="com.example.eurekaconsumer.entity.JoinedMembershipEntity">
+		SELECT `membership_ID` membershipID,
+		`status` status,
+		`fee_PerMonth` feePerMonth,
+		`data_Joined` dataJoined,
+		`account_ID` accountID
+		FROM Joined_Membership
+	</select>
+
+	<select id="selectUserAccountAll" resultType="com.example.eurekaconsumer.entity.UserAccountEntity" >
+		SELECT `account_ID` accountID,
+			`gender` gender,
+			`registeration_Date` registerDate,
+			`birth_Date` birthDate,
+			`age` age,
+			`account_Name` accountName
+		FROM User_Account
+	</select>
+
+	<select id="queryUserAccountData" resultType="com.example.eurekaconsumer.entity.UserAccountEntity"  parameterType="com.example.eurekaconsumer.entity.RequestEntity">
+		SELECT `account_ID` accountID,
+		`gender` gender,
+		`registeration_Date` registerDate,
+		`birth_Date` birthDate,
+		`age` age,
+		`account_Name` accountName
+		FROM User_Account
+		WHERE ${type} &gt; #{min}
+		AND ${type} &lt; #{max}
+		AND gender in (${gender})
+	</select>
+</mapper>
