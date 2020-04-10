@@ -8,6 +8,9 @@ import java.util.List;
 
     List<UserAccountEntity> queryUserAccountData(RequestEntity requestEntity);
 
+    List<UserAccountEntity> queryAggregationData(RequestEntity requestEntity);
+
+    List<JoinTableEntity> joinTable();
     /**
      * 给用户添加游戏购买记录
      * @return
@@ -63,4 +66,13 @@ import java.util.List;
      */
     List<UserAccountEntity>  selectUserByAggregationTpye(String aggregationTpye);
 
+    /**
+     * 删除用户
+     */
+    void deldteUserAccount(String acconutId);
+
+
+    void insertAccount(UserAccountEntity userAccountEntity);
+
+    void updateAccount(UserAccountEntity userAccountEntity);
 }

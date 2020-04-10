@@ -1,4 +1,5 @@
 package com.example.eurekaconsumer.controller;
+import com.example.eurekaconsumer.entity.JoinTableEntity;
 import com.example.eurekaconsumer.entity.JoinedMembershipEntity;
 import com.example.eurekaconsumer.entity.RequestEntity;
 import com.example.eurekaconsumer.entity.UserAccountEntity;
@@ -30,6 +31,19 @@ public class WelcomeController {
         return data;
     }
 
+    @RequestMapping("/queryAggregationAccountData")
+    @ResponseBody
+    public List<UserAccountEntity>  queryAggregationAccountData(@RequestBody RequestEntity requestEntity){
+        List<UserAccountEntity> data = null;
+        if ("true".equals(requestEntity.getGender())) {
+            data =  gameService.queryAggregationData(requestEntity);
+        }else {
+            requestEntity.setGender("''");
+            data =  gameService.queryUserAccountData(requestEntity);
+        }
+        return data;
+    }
+
     @RequestMapping("/queryMembershipData")
     @ResponseBody
     public List<JoinedMembershipEntity>  selectMembershipAll(){
@@ -43,4 +57,27 @@ public class WelcomeController {
         return gameService.queryUserAccountData(requestEntity);
     }
 
+    @RequestMapping(method = RequestMethod.POST, path = "/delteAccount")
+    @ResponseBody
+    public void delteAccount(@RequestBody RequestEntity requestEntity){
+        gameService.deldteUserAccount(requestEntity.getAcconutId());
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/insertAccount")
+    @ResponseBody
+    public void delteAccount(@RequestBody UserAccountEntity userAccountEntity){
+        gameService.insertAccount(userAccountEntity);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/updateAccount")
+    @ResponseBody
+    public void updateAccount(@RequestBody UserAccountEntity userAccountEntity){
+        gameService.updateAccount(userAccountEntity);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/getJoinTableData")
+    @ResponseBody
+    public List<JoinTableEntity> joinTable(){
+        return gameService.joinTable();
+    }
 }

@@ -18,6 +18,16 @@ public class GameServiceImpl implements GameService {
         return GameDao.queryUserAccountData(requestEntity);
     }
 
+    @Override
+    public List<UserAccountEntity> queryAggregationData(RequestEntity requestEntity) {
+        return GameDao.queryAggregationData(requestEntity);
+    }
+
+    @Override
+    public List<JoinTableEntity> joinTable() {
+        return GameDao.joinTable();
+    }
+
     /**
      * 给用户添加游戏购买记录
      * @return
@@ -98,6 +108,21 @@ public class GameServiceImpl implements GameService {
         return GameDao.selectUserByAggregationTpye(aggregationTpye);
     }
 
+    /**
+     * 删除用户
+     */
+    @Override
+    public void deldteUserAccount(String acconutId) {
+        GameDao.deldteUserAccount(acconutId);
+    }
 
+    @Override
+    public void insertAccount(UserAccountEntity userAccountEntity) {
+        GameDao.insertAccount(userAccountEntity);
+    }
 
+    @Override
+    public void updateAccount(UserAccountEntity userAccountEntity) {
+        GameDao.updateAccount(userAccountEntity);
+    }
 }

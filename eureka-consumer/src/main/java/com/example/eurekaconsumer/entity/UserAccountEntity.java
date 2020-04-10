@@ -3,20 +3,29 @@ package com.example.eurekaconsumer.entity;
 import java.util.Date;
 
 public class UserAccountEntity {
-    private String accountID;
+    private String accountId;
     private String gender;
     private Date registerDate;
     private Date birthDate;
     private int age;
     private String accountName;
     private String membershipID;
+    private String count;
 
-    public String getAccountID() {
-        return accountID;
+    public String getCount() {
+        return count;
     }
 
-    public void setAccountID(String accountID) {
-        this.accountID = accountID;
+    public void setCount(String count) {
+        this.count = count;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
     public String getGender() {
