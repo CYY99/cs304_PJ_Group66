@@ -75,7 +75,7 @@ public class GameServiceImpl implements GameService {
         }
         return cols;
     }
-    
+
     @Override
     public void insertPurchaseRecord(PurchaseRecordEntity purchaseRecordEntity){
         GameDao.insertPurchaseRecord(purchaseRecordEntity);
