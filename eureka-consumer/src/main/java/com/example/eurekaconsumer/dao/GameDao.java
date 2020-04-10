@@ -34,7 +34,7 @@ public interface GameDao {
     UserAccountEntity selectUserAccount(String accountName);
 
     List<UserAccountEntity>  selectUserByAggregationTpye(String aggregationTpye);
-    
+
     void deldteUserAccount(String acconutId);
 
     void insertAccount(UserAccountEntity userAccountEntity);
