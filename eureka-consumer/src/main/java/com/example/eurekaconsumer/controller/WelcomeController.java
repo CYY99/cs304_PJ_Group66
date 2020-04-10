@@ -31,6 +31,13 @@ public class WelcomeController {
         return data;
     }
 
+    @RequestMapping("/queryDivision")
+    @ResponseBody
+    public List<UserAccountEntity>  queryDivision(){
+        List<UserAccountEntity> data =  gameService.queryDivision();
+        return data;
+    }
+
     @RequestMapping("/queryAggregationAccountData")
     @ResponseBody
     public List<UserAccountEntity>  queryAggregationAccountData(@RequestBody RequestEntity requestEntity){
@@ -77,7 +84,7 @@ public class WelcomeController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/getJoinTableData")
     @ResponseBody
-    public List<JoinTableEntity> joinTable(){
-        return gameService.joinTable();
+    public List<JoinTableEntity> joinTable(@RequestBody RequestEntity requestEntity){
+        return gameService.joinTable(requestEntity);
     }
 }

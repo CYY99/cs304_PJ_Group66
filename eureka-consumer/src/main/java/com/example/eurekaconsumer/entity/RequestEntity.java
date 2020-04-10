@@ -1,5 +1,7 @@
 package com.example.eurekaconsumer.entity;
 
+import java.util.List;
+
 public class RequestEntity {
     private String gameId;
     private String acconutId;
@@ -7,6 +9,24 @@ public class RequestEntity {
     private int min;
     private String type;
     private String gender;
+    private List<String> column;
+    private String columnString;
+
+    public String getColumnString() {
+        return columnString;
+    }
+
+    public void setColumnString(String columnString) {
+        this.columnString = columnString;
+    }
+
+    public List<String> getColumn() {
+        return column;
+    }
+
+    public void setColumn(List<String> column) {
+        this.column = column;
+    }
 
     public String getGameId() {
         return gameId;

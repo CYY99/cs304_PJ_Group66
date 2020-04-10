@@ -10,8 +10,15 @@ import java.util.List;
 
 @Service
 public class GameServiceImpl implements GameService {
+
+
     @Autowired
     private GameDao GameDao;
+
+    @Override
+    public List<UserAccountEntity> queryDivision() {
+        return GameDao.queryDivision();
+    }
 
     @Override
     public List<UserAccountEntity> queryUserAccountData(RequestEntity requestEntity) {
@@ -24,8 +31,49 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public List<JoinTableEntity> joinTable() {
-        return GameDao.joinTable();
+    public List<JoinTableEntity> joinTable(RequestEntity requestEntity) {
+        List<String> columnList =  requestEntity.getColumn();
+        StringBuffer colmunString = new StringBuffer();
+        for(String col :columnList){
+            if (col.equals("accountId")) {
+                colmunString.append("ua.`"+getColumnName(col)+"` "+col+",");
+            } else if (col.equals("registerDate")) {
+                colmunString.append("ua.`registeration_Date` "+col+",");
+            }
+            else {
+                colmunString.append("`"+getColumnName(col)+"` "+col+",");
+            }
+
+        }
+        colmunString.deleteCharAt(colmunString.length() - 1);
+        requestEntity.setColumnString(colmunString.toString());
+        return GameDao.joinTable(requestEntity);
+    }
+
+    private String getColumnName(String cols){
+        switch (cols) {
+            case "accountId":
+                return "account_ID";
+            case "gender":
+                return "gender";
+            case "registerDate":
+                return "register_Date";
+            case "birthDate":
+                return "birth_Date";
+            case "age":
+                return "age";
+            case "accountName":
+                return "account_Name";
+            case "membershipID":
+                return "membership_ID";
+            case "status":
+                return "status";
+            case "feePerMonth":
+                return "fee_PerMonth";
+            case "dataJoined":
+                return "data_Joined";
+        }
+        return cols;
     }
 
     /**

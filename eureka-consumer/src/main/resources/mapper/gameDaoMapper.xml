@@ -71,19 +71,23 @@
 		WHERE `account_ID` = #{accountId}
 	</insert>
 
-	<select id="joinTable" resultType="com.example.eurekaconsumer.entity.JoinTableEntity">
-		SELECT ua.`account_ID` accountID,
-		ua.`gender` gender,
-		ua.`registeration_Date` registerDate,
-		ua.`birth_Date` birthDate,
-		ua.`age` age,
-		ua.`account_Name` accountName,
-		jm.`membership_ID` membershipID,
-		jm.`status` status,
-		jm.`fee_PerMonth` feePerMonth,
-		jm.`data_Joined` dataJoined
-		FROM Joined_Membership jm,User_Account ua
-		WHERE jm.account_ID = ua.account_ID
+	<select id="joinTable" resultType="com.example.eurekaconsumer.entity.JoinTableEntity" parameterType="com.example.eurekaconsumer.entity.RequestEntity">
+		SELECT ${columnString}
+		FROM Joined_Membership jm
+		INNER JOIN User_Account ua ON jm.account_ID = ua.account_ID
+		WHERE ${type} &gt; #{min}
+		AND ${type} &lt; #{max}
+		AND gender in (${gender})
 	</select>
 
+	<select id="queryDivision"  resultType="com.example.eurekaconsumer.entity.JoinTableEntity">
+		SELECT `account_Name` accountName
+		FROM User_Account U
+		WHERE NOT EXISTS (SELECT `game_ID`
+		FROM Developed_Games D
+		WHERE NOT EXISTS (SELECT P.`account_ID`
+		FROM Purchase P
+		WHERE P.`game_ID` = D.`game_ID`
+		AND P.`account_ID` = U.`account_ID`))
+	</select>
 </mapper>

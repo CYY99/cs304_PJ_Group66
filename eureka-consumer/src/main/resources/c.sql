@@ -54,7 +54,6 @@
 	 * 查看所有用户
 	 * @return
 	 */
-
 	SELECT (`account_ID`,
 		`gender`,
 		`registeration_Date`,
